@@ -16,7 +16,6 @@ st.set_page_config(page_title="Gerenciador de Longas", layout="centered")
 st.title("Gerenciador de Longas")
 st.markdown(
     "Faça upload do **PDF atual** para atualizar a planilha **Longas.xlsx**.\n"
-    "Opcionalmente, envie o **PDF anterior** para registrar baixas no histórico."
 )
 
 # -------------------------------------------------
