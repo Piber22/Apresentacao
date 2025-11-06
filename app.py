@@ -18,8 +18,7 @@ st.markdown("Faça upload do **PDF atual** e, opcionalmente, do **PDF anterior**
 col1, col2 = st.columns(2)
 with col1:
     pdf_novo_file = st.file_uploader("📄 PDF Atual (data.pdf)", type="pdf", key="novo")
-with col2:
-    pdf_antigo_file = st.file_uploader("📄 PDF Anterior (opcional)", type="pdf", key="antigo")
+
 
 # === Botão de processamento ===
 if st.button("🚀 Atualizar Longas", type="primary"):
