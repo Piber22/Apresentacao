@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta de Melhoria - Processos de Rouparia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #201F20;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-type: y proximity;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        .presentation::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 40px;
+            scroll-snap-align: start;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide 1 - Título */
+        .slide-1 {
+            background: linear-gradient(135deg, #201F20 0%, #2a2a2a 100%);
+            text-align: center;
+        }
+
+        .slide-1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #E94B22, transparent);
+        }
+
+        .slide-1 h1 {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            color: #E94B22;
+        }
+
+        .slide-1 .subtitle {
+            font-size: clamp(16px, 2.5vw, 24px);
+            font-weight: 300;
+            color: #DDDDDD;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .slide-1 .logo {
+            max-width: 420px;
+            width: 70%;
+            filter: drop-shadow(0 8px 32px rgba(233, 75, 34, 0.35));
+            animation: logoEntrance 1.4s ease-out forwards;
+        }
+
+        @keyframes logoEntrance {
+            from { opacity: 0; transform: scale(0.92); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Slides de Conteúdo */
+        .content-slide {
+            background: #201F20;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .slide-title {
+            font-size: clamp(24px, 3.5vw, 40px);
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .slide-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 70%;
+            background: #E94B22;
+            border-radius: 3px;
+        }
+
+        /* Slide 2 - Contexto */
+        .context-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .context-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #DDDDDD;
+        }
+
+        .process-list {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #E94B22;
+        }
+
+        .process-list h3 {
+            color: #E94B22;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .process-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .process-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+            color: #DDDDDD;
+        }
+
+        .process-list li::before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            color: #E94B22;
+            font-size: 20px;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            background: #333;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: #E94B22;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .process-step p {
+            margin: 0;
+            color: #DDDDDD;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Slide 3 - Desafios */
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .challenge-card {
+            background: #2a2a2a;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #E94B22;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .challenge-card:hover {
+            border-color: #E94B22;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(233, 75, 34, 0.3);
+        }
+
+        .challenge-card p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #DDDDDD;
+        }
+
+        .impact-text {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #E94B22 0%, #d43d1a 100%);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Slide 4 - Objetivo */
+        .objective-container {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .objective-icon {
+            flex-shrink: 0;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, #E94B22 0%, #d43d1a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            box-shadow: 0 20px 60px rgba(233, 75, 34, 0.4);
+        }
+
+        .objective-list {
+            flex: 1;
+        }
+
+        .objective-item {
+            background: #2a2a2a;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            border-left: 4px solid #E94B22;
+            font-size: 16px;
+            color: #DDDDDD;
+            transition: all 0.3s ease;
+        }
+
+        .objective-item:hover {
+            background: #333;
+            transform: translateX(10px);
+        }
+
+        /* Slide 5 - Solução */
+        .solution-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .solution-header .slide-title {
+            padding-left: 0;
+            margin-bottom: 10px;
+        }
+
+        .solution-header .slide-title::before {
+            display: none;
+        }
+
+        .solution-name {
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #E94B22 0%, #ff6347 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .solution-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #201F20 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #E94B22;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(233, 75, 34, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #DDDDDD;
+            line-height: 1.5;
+        }
+
+        /* Slide 6 - Comparação de Processos */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 25px;
+            align-items: start;
+            width: 100%;
+        }
+
+        .process-column {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            height: 100%;
+        }
+
+        .process-column.old {
+            border-top: 4px solid #999;
+        }
+
+        .process-column.new {
+            border-top: 4px solid #E94B22;
+        }
+
+        .process-column h3 {
+            font-size: 20px;
+            margin-bottom: 18px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .process-column.old h3 {
+            color: #999;
+        }
+
+        .process-column.new h3 {
+            color: #E94B22;
+        }
+
+        .comparison-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #E94B22;
+            padding-top: 50px;
+        }
+
+        .comparison-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: #201F20;
+            border-radius: 8px;
+        }
+
+        .comparison-step-number {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .process-column.old .comparison-step-number {
+            background: #666;
+        }
+
+        .process-column.new .comparison-step-number {
+            background: #E94B22;
+        }
+
+        .comparison-step p {
+            margin: 0;
+            color: #DDDDDD;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .improvement-badge {
+            display: inline-block;
+            background: #E94B22;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: 6px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 7 - Ganhos */
+        .gains-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .gain-column {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            border-top: 5px solid #E94B22;
+        }
+
+        .gain-column h3 {
+            color: #E94B22;
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .gain-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .gain-column li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 15px;
+            color: #DDDDDD;
+            line-height: 1.5;
+        }
+
+        .gain-column li::before {
+            content: '✓';
+            position: absolute;
+            left: 5px;
+            color: #E94B22;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        /* Slide 8 - Diferenciais */
+        .differentials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .differential-card {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #E94B22;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #DDDDDD;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+        }
+
+        .differential-card:hover {
+            background: #333;
+            transform: translateY(-5px);
+        }
+
+        .differential-icon {
+            font-size: 28px;
+            margin-right: 12px;
+            color: #E94B22;
+        }
+
+        /* Slide 9 - Resultado */
+        .result-container {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .result-text {
+            font-size: 22px;
+            line-height: 1.7;
+            color: #DDDDDD;
+            margin-bottom: 30px;
+        }
+
+        .result-thanks {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .result-thanks-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #E94B22;
+        }
+
+        /* Navegação */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            border: 2px solid #E94B22;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot:hover,
+        .nav-dot.active {
+            background: #E94B22;
+            transform: scale(1.3);
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #E94B22;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .context-grid,
+            .objective-container,
+            .gains-grid,
+            .differentials-grid,
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+
+            .slide {
+                padding: 30px 20px;
+            }
+
+            .nav-dots {
+                display: none;
+            }
+
+            .objective-icon {
+                width: 120px;
+                height: 120px;
+                font-size: 50px;
+            }
+
+            .comparison-arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation" id="presentation">
+        <!-- Slide 1: Título -->
+        <section class="slide slide-1" data-slide="1">
+            <img src="logo.png" alt="Logo" class="logo">
+            <div class="subtitle" style="margin-top: 32px;">PROPOSTA DE MELHORIA PARA PROCESSOS DE ROUPARIA</div>
+
+            <div class="scroll-hint">⬇ Role para continuar</div>
+        </section>
+
+        <!-- Slide 2: Contexto -->
+        <section class="slide content-slide" data-slide="2">
+            <h2 class="slide-title">Contexto Operacional – Controle de scrubs</h2>
+            <div class="context-grid">
+                <div>
+                    <h3 style="color: #E94B22; font-size: 20px; margin-bottom: 15px; font-weight: 600;">Processo Atual</h3>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <span class="step-number">1</span>
+                            <p>Colaborador da assistência solicita um scrub</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">2</span>
+                            <p>Responsável separa o scrub</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">3</span>
+                            <p>Preenche a folha, procurando o nome na lista, coloca turno, data e tamanho</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">4</span>
+                            <p>Colaborador assina a folha e devolve ao responsável</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">5</span>
+                            <p>Na devolução: entrega o scrub usado e procura seu nome na lista para assinar</p>
+                        </div>
+                        <div class="process-step">
+                            <span class="step-number">6</span>
+                            <p>No dia seguinte a lista é analisada para extração de informações</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-list">
+                    <h3>Registros Manuais Incluem:</h3>
+                    <ul>
+                        <li>Nome do colaborador</li>
+                        <li>Tamanho do uniforme</li>
+                        <li>Data e turno</li>
+                        <li>Assinatura de retirada e devolução</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #E94B22;">
+                        <p style="color: #DDDDDD; font-size: 13px; line-height: 1.5;">
+                            Os dados são consolidados posteriormente para controle interno, tratativas com lavanderia e reporte ao cliente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Desafios -->
+        <section class="slide content-slide" data-slide="3">
+            <h2 class="slide-title">Desafios do Processo Atual</h2>
+            <div class="challenges-grid">
+                <div class="challenge-card">
+                    <p>Alto tempo operacional para registro manual</p>
+                </div>
+                <div class="challenge-card">
+                    <p>Formação de filas em horários de pico</p>
+                </div>
+                <div class="challenge-card">
+                    <p>Risco de falhas no controle (assinaturas incorretas ou ausentes)</p>
+                </div>
+                <div class="challenge-card">
+                    <p>Dependência de papel e reimpressões</p>
+                </div>
+                <div class="challenge-card">
+                    <p>Falta de visibilidade em tempo real</p>
+                </div>
+                <div class="challenge-card">
+                    <p>Difícil adesão ao processo</p>
+                </div>
+            </div>
+            <div class="impact-text">
+                O que gera impacto direto na agilidade operacional e confiabilidade das informações.
+            </div>
+        </section>
+
+        <!-- Slide 4: Objetivo -->
+        <section class="slide content-slide" data-slide="4">
+            <h2 class="slide-title">Objetivo da Transformação</h2>
+            <div class="objective-container">
+                <div class="objective-icon">🎯</div>
+                <div class="objective-list">
+                    <div class="objective-item">Agilidade no atendimento</div>
+                    <div class="objective-item">Rastreabilidade das movimentações</div>
+                    <div class="objective-item">Redução de erros manuais</div>
+                    <div class="objective-item">Disponibilidade de dados em tempo real</div>
+                    <div class="objective-item">Maior segurança da informação</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Solução -->
+        <section class="slide content-slide" data-slide="5">
+            <div class="solution-header">
+                <h2 class="slide-title">Solução proposta:</h2>
+                <div class="solution-name">Agiliza aí!</div>
+            </div>
+            <p style="text-align: center; font-size: 17px; color: #DDDDDD; margin-bottom: 20px;">
+                Sistema desenvolvido para automatizar o controle de entrega e devolução de uniformes
+            </p>
+            <div class="solution-features">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <p>Registro rápido e intuitivo</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <p>Assinatura digital</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🕐</div>
+                    <p>Controle automático de data e turno</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <p>Monitoramento em tempo real</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <p>Histórico completo de movimentações</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <p>Alertas inteligentes</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Comparação de Processos -->
+        <section class="slide content-slide" data-slide="6">
+            <h2 class="slide-title">Transformação do Processo</h2>
+            <div class="comparison-container">
+                <div class="process-column old">
+                    <h3>❌ Processo Atual</h3>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">1</span>
+                        <p>Colaborador da assistência solicita um scrub</p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">2</span>
+                        <p>Responsável separa o scrub</p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">3</span>
+                        <p>Preenche a folha, procurando o nome na lista, coloca turno, data e tamanho</p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">4</span>
+                        <p>Colaborador procura seu nome na lista, assina a folha e devolve ao responsável</p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">5</span>
+                        <p>Posteriormente colaborador retorna, entrega o scrub usado, procura seu nome na lista e assina a devolução</p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">6</span>
+                        <p>No outro dia a lista de entrega e devolução é analisada para extração de informações</p>
+                    </div>
+                </div>
+
+                <div class="comparison-arrow">
+                    →
+                </div>
+
+                <div class="process-column new">
+                    <h3>✅ Novo Processo</h3>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">1</span>
+                        <p>Colaborador(es) da assistência solicitam o scrub</p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">2</span>
+                        <p>Responsável separa o scrub</p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">3</span>
+                        <p>Pesquisa no sistema o nome e preenche apenas os tamanhos entregues <span class="improvement-badge">+ rápido</span></p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">4</span>
+                        <p>Colaborador recebe o celular com tudo pronto e apenas assina <span class="improvement-badge">+ Ágil</span></p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">5</span>
+                        <p>Posteriormente colaborador retorna, entrega o scrub usado e recebe o celular pronto para assinar a devolução<span class="improvement-badge">- burocracia</span></p>
+                    </div>
+                    <div class="comparison-step">
+                        <span class="comparison-step-number">6</span>
+                        <p>Todos os dados são coletados e analisados no momento do preenchimento <span class="improvement-badge">Tempo Real</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Ganhos -->
+        <section class="slide content-slide" data-slide="7">
+            <h2 class="slide-title">Ganhos para Operação e Cliente</h2>
+            <div class="gains-grid">
+                <div class="gain-column">
+                    <h3>Operacionais</h3>
+                    <ul>
+                        <li>Redução do tempo de atendimento</li>
+                        <li>Redução de filas em horários de pico</li>
+                        <li>Eliminação de controles em papel</li>
+                    </ul>
+                </div>
+                <div class="gain-column">
+                    <h3>Controle e Qualidade</h3>
+                    <ul>
+                        <li>Maior confiabilidade dos dados</li>
+                        <li>Rastreabilidade completa</li>
+                    </ul>
+                </div>
+                <div class="gain-column">
+                    <h3>Gestão</h3>
+                    <ul>
+                        <li>Relatórios automáticos</li>
+                        <li>Informações em tempo real</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Diferenciais -->
+        <section class="slide content-slide" data-slide="8">
+            <h2 class="slide-title">Diferenciais Estratégicos</h2>
+            <div class="differentials-grid">
+                <div class="differential-card">
+                    <span class="differential-icon">🏠</span>
+                    Sistema desenvolvido internamente
+                </div>
+                <div class="differential-card">
+                    <span class="differential-icon">🎯</span>
+                    Total adaptação às necessidades da operação
+                </div>
+                <div class="differential-card">
+                    <span class="differential-icon">🔄</span>
+                    Facilidade de evolução e melhorias contínuas
+                </div>
+                <div class="differential-card">
+                    <span class="differential-icon">🔒</span>
+                    Redução de risco de perda de informação
+                </div>
+                <div class="differential-card" style="grid-column: 1 / -1;">
+                    <span class="differential-icon">🌿</span>
+                    Processo Paper Free
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Vídeo Demonstração -->
+        <section class="slide content-slide" data-slide="9">
+            <h2 class="slide-title">Sistema na Prática</h2>
+            <div style="width:100%;display:flex;flex-direction:column;align-items:center;gap:20px;">
+                <p style="color:#DDDDDD;font-size:16px;text-align:center;max-width:700px;">Veja abaixo uma demonstração do sistema funcionando na prática.</p>
+                <div style="position:relative;width:100%;max-width:860px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(233,75,34,0.3);border:2px solid #E94B22;">
+                    <video
+                        src="video.mp4"
+                        style="width:100%;height:100%;object-fit:contain;background:#000;"
+                        controls
+                        preload="metadata">
+                        Seu navegador não suporta a reprodução de vídeo.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Resultado -->
+        <section class="slide content-slide" data-slide="10">
+            <h2 class="slide-title">Resultado Esperado</h2>
+            <div class="result-container">
+                <div class="result-text">
+                    A digitalização do processo traz maior eficiência operacional, melhora a confiabilidade dos dados e aumenta a velocidade de resposta ao cliente e à lavanderia, elevando o nível de controle e qualidade do serviço.
+                </div>
+                <div style="font-size: 18px; margin-top: 10px; color: #DDDDDD; font-style: italic; font-weight: 400;">
+                    "Melhorar processos é cuidar das pessoas, do tempo e da qualidade ao mesmo tempo."
+                </div>
+                <div class="result-thanks">
+                    <div class="result-thanks-text">Obrigado pela atenção!</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navegação por pontos -->
+    <div class="nav-dots">
+        <div class="nav-dot active" onclick="scrollToSlide(1)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(2)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(3)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(4)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(5)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(6)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(7)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(8)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(9)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(10)"></div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const totalSlides = 10;
+
+        // Navegação por pontos
+        function scrollToSlide(slideNumber) {
+            currentSlideIndex = slideNumber - 1;
+            const slide = document.querySelector(`[data-slide="${slideNumber}"]`);
+            if (slide) {
+                slide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                updateNavDots(slideNumber);
+            }
+        }
+
+        // Atualizar pontos de navegação
+        function updateNavDots(slideNumber) {
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === slideNumber);
+            });
+        }
+
+        // Observador de interseção melhorado
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.6
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const slideNumber = parseInt(entry.target.dataset.slide);
+                    currentSlideIndex = slideNumber - 1;
+                    updateNavDots(slideNumber);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide').forEach(slide => {
+            observer.observe(slide);
+        });
+
+        // Navegação por teclado melhorada
+        let isNavigating = false;
+
+        document.addEventListener('keydown', (e) => {
+            if (isNavigating) return;
+
+            if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
+                e.preventDefault();
+                if (currentSlideIndex < totalSlides - 1) {
+                    isNavigating = true;
+                    scrollToSlide(currentSlideIndex + 2);
+                    setTimeout(() => { isNavigating = false; }, 800);
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
+                e.preventDefault();
+                if (currentSlideIndex > 0) {
+                    isNavigating = true;
+                    scrollToSlide(currentSlideIndex);
+                    setTimeout(() => { isNavigating = false; }, 800);
+                }
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                isNavigating = true;
+                scrollToSlide(1);
+                setTimeout(() => { isNavigating = false; }, 800);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                isNavigating = true;
+                scrollToSlide(totalSlides);
+                setTimeout(() => { isNavigating = false; }, 800);
+            }
+        });
+
+        // Navegação por scroll do mouse melhorada
+        let scrollTimeout;
+        const presentation = document.getElementById('presentation');
+
+        presentation.addEventListener('wheel', (e) => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                // Atualizar o índice atual baseado no slide visível
+                const slides = document.querySelectorAll('.slide');
+                slides.forEach((slide, index) => {
+                    const rect = slide.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+                        currentSlideIndex = index;
+                        updateNavDots(index + 1);
+                    }
+                });
+            }, 150);
+        }, { passive: true });
+    </script>
+</body>
+</html>
